@@ -47,7 +47,7 @@ st.pyplot(plot_graph((15,6), nvidia_data['MA_for_100_days'], nvidia_data, 1, nvi
 
 from sklearn.preprocessing import MinMaxScaler
 scaler = MinMaxScaler(feature_range=(0,1))
-scaled_data = scaler.fit_transform(x_test)
+scaled_data = scaler.fit_transform(x_test.values.reshape(-1, 1))
 
 x_data = []
 y_data = []
@@ -66,11 +66,13 @@ inv_y_test = scaler.inverse_transform(y_data)
 ploting_data = pd.DataFrame({
     'original_test_data': inv_y_test.reshape(-1),
     'predictions': inv_pre.reshape(-1)
-}, index = nvidia_data.index[splitting_len+100:])
+})
 st.subheader("Original values vs Predicted values")
 st.write(ploting_data)
 
 st.subheader('Original Close price vs Predicted Close price')
 fig = plt.figure(figsize=(15,6))
 plt.plot(pd.concat([nvidia_data.Close[:splitting_len+100], ploting_data['original_test_data']], axis=0), label='Original')
-plt.plot
+plt.plot(pd.concat([nvidia_data.Close[:splitting_len+100], ploting_data['predictions']], axis=0), label='Predicted')
+plt.legend()
+st.pyplot(fig)
