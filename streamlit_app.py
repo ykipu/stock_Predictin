@@ -5,6 +5,7 @@ from keras.models import load_model
 import matplotlib.pyplot as plt
 import yfinance as yf
 from datetime import datetime
+from sklearn.preprocessing import MinMaxScaler
 
 st.title("Stock Price Predictor App")
 
@@ -45,7 +46,6 @@ st.pyplot(plot_graph((15,6), nvidia_data['MA_for_100_days'], nvidia_data, 0))
 st.subheader('Original Close Price and MA for 250 days and MA for 250 days')
 st.pyplot(plot_graph((15,6), nvidia_data['MA_for_100_days'], nvidia_data, 1, nvidia_data['MA_for_250_days']))
 
-from sklearn.preprocessing import MinMaxScaler
 scaler = MinMaxScaler(feature_range=(0,1))
 scaled_data = scaler.fit_transform(x_test.values.reshape(-1, 1))
 
