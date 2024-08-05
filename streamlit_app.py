@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 import yfinance as yf
 from datetime import datetime
 from sklearn.preprocessing import MinMaxScaler
-from keras.models import load_model
 
 # Load the model
 model = load_model('my_model.h5')
